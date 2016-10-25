@@ -8,32 +8,31 @@ class App{
 
 
 
-  function __contruct () {
+  function __construct () {
 
     $url = $this->_parseURL();
 
     try{
+      $this->_getController($url[0]);
 
-      if (!$this->_callController($url[0]))
-        throw new Exception("Error Processing the Controller", 1);
-      }
 
       // remove o controller da  url
-      unset($url[0]);
+     unset($url[0]);
 
-      if(!$this->_callMethod())
-        throw new Exception("Error Processing the Method", 1);
+
+      if(!$this->_getMethod($url[1]))
+        throw new Exception("Este Método não exists", 1);
+
 
       // remove o method da  url  obs('se der erro testar $url[1]')
-      unset($url[0]);
+      unset($url[1]);
 
       if(isset($url))
-        $args  = $url;
+        $this->args  = $url;
 
-      call_user_func_array(array($controller, $method), $args);
 
-    catch(Exception $e){
-      echo 'error';
+    }catch(Exception $e){
+      echo 'o que o capeta fez: '. $e->getMessage() .'satanas é sujo';
     }
   }
 
@@ -43,21 +42,25 @@ class App{
     if(isset($_GET['url']))
       return explode('/', rtrim($_GET['url'], '/'));
     else
-      returne array('home','index');
+      return array('home','index');
   }
 
 
 
-  private function _callController  ($name) {
-      echo $name .'<br/>';
-      $this->controller = $name;
+  private function _getController  ($name) {
+      $name .="Controller";
+      $this->controller = new $name;
+
   }
 
 
 
-  private function _callMethod($name)  {
-    echo $name .'<br/>'
-    $this->method = $name;
+  private function _getMethod($name)  {
+    if(method_exists($this->controller, $name)){
+      $this->method = $name;
+      return true;
+    }else
+      return false;
   }
 
 
