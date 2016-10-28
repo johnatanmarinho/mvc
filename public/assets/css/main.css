@@ -1,2 +1,40 @@
 body {
-  background: lightblue; }
+  margin: 0;
+  padding: 0;
+  background: #f1f1f1;
+  font-family: cursive; }
+
+header {
+  background: lavender;
+  color: white;
+  font-size: 5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 24px; }
+  section article {
+    background: white;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    width: 32%;
+    margin-left: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden; }
+    section article h1 {
+      margin-top: 0;
+      padding-top: 16px;
+      background: lavender;
+      color: white; }
+    section article p {
+      padding: 16px;
+      text-align: justify; }
+    section article:nth-child(3n) {
+      width: 100%; }
