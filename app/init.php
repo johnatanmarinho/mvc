@@ -15,6 +15,11 @@ spl_autoload_register(function ($class){
   //impor from
   else if (file_exists($file.'models/'. $class . '.php'))
       require_once $file.'models/'. $class . '.php';
+
+
+  //impor from
+  else if (file_exists($file.'beans/'. $class . '.php'))
+      require_once $file.'beans/'. $class . '.php';
 });
 
   //require_once 'core/app.php';
